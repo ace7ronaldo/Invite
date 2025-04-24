@@ -1,0 +1,36 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f3f2f1;
+  margin: 0;
+  padding: 2rem;
+  color: #323130;
+}
+
+.app {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+input, button {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #8a8886;
+  border-radius: 6px;
+}
+
+button {
+  background-color: #0078d4;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005a9e;
+}
