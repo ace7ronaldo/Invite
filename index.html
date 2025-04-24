@@ -41,37 +41,8 @@
 <h1>Puzzle Game</h1>
 <p>Complete each puzzle to unlock the next level!</p>
 
-<!-- Level 1: Entourage Puzzle -->
-<div id="level1" class="level active">
-    <h2>Level 1: Entourage Puzzle</h2>
-    <p>Vinny Chase and the crew need to combine their efforts. Turtle says they need the LCM of 2 and 3. What’s the answer?</p>
-    <input type="text" id="answer1" placeholder="Enter your answer">
-    <button onclick="checkAnswer('level1', 'answer1', 6)">Submit Answer</button>
-</div>
-
-<!-- Level 2: Silicon Valley Puzzle -->
-<div id="level2" class="level">
-    <h2>Level 2: Silicon Valley Puzzle</h2>
-    <p>Dinesh says, 'We need the 4th Fibonacci number divisible by 4.' What’s the answer?</p>
-    <input type="text" id="answer2" placeholder="Enter your answer">
-    <button onclick="checkAnswer('level2', 'answer2', 4)">Submit Answer</button>
-</div>
-
-<!-- Level 3: The Office Puzzle -->
-<div id="level3" class="level">
-    <h2>Level 3: The Office Puzzle</h2>
-    <p>Dwight plans a party for 6 guests. Each guest will eat 4 cupcakes. How many cupcakes must Dwight order?</p>
-    <input type="text" id="answer3" placeholder="Enter your answer">
-    <button onclick="checkAnswer('level3', 'answer3', 24)">Submit Answer</button>
-</div>
-
-<!-- Level 4: Friends Puzzle -->
-<div id="level4" class="level">
-    <h2>Level 4: Friends Puzzle</h2>
-    <p>Joey and Chandler are trying to find baby Ben. The coordinates are: Latitude: 28.5421, Longitude: -81.3790. Where is Ben?</p>
-    <input type="text" id="answer4" placeholder="Enter your answer">
-    <button onclick="checkAnswer('level4', 'answer4', 'hillstone')">Submit Answer</button>
-</div>
+<!-- Level Container -->
+<div id="levelContainer"></div>
 
 <!-- Congratulations: Final Message -->
 <div id="congratulations" class="level">
@@ -80,20 +51,73 @@
 </div>
 
 <script>
-    function checkAnswer(levelId, inputId, correctAnswer) {
-        const userAnswer = document.getElementById(inputId).value.trim().toLowerCase();
-        if (userAnswer == correctAnswer.toString().toLowerCase()) {
-            document.getElementById(levelId).classList.remove("active"); // Hide current level
-            const nextLevel = document.getElementById("level" + (parseInt(levelId.replace('level', '')) + 1));
-            if (nextLevel) {
-                nextLevel.classList.add("active"); // Show next level
-            } else {
-                document.getElementById("congratulations").classList.add("active"); // Show final message
-            }
-        } else {
-            alert("❌ Incorrect! Try again.");
-        }
+// Array of Questions
+const questions = [
+    {
+        "question": "1. Vinny Chase and the crew are trying to figure out how much money they need to invest in a new project. Eric says they need to combine the efforts of the entire crew to make it work.\n\nTurtle, ever the optimist, says, 'I’ve got the LCM of our team’s biggest numbers right here. We need to find the LCM of 2 and 3 to get this project off the ground.'\n\nDrama interrupts, 'Don’t forget about the first perfect number, it's part of the equation too!'\n\nCan you help them solve for the total investment they need to make the project happen?",
+        "answer": 6,
+        "validation": function(input) { return parseInt(input) === 6; }
+    },
+    {
+        "question": "2. Y = In the world of tech startups, Pied Piper’s algorithm is supposed to be revolutionary. However, Dinesh and Gilfoyle are debating an equation that could change everything.\n\nDinesh says, 'The solution to our problem is Fibonacci numbers, but we need the 4th Fibonacci number divisible by 4.'\n\nGilfoyle sarcastically retorts, 'This is exactly why you’re not getting a seat on the board.'\n\nCan you solve this problem to prove you belong on the board?",
+        "answer": 4,
+        "validation": function(input) { return parseInt(input) === 4; }
+    },
+    {
+        "question": "3. Z = In the classic battle for supremacy over the Party Planning Committee, Dwight plans a party for 6 guests, each of whom will eat 4 cupcakes. How many cupcakes must Dwight order to make sure each guest gets the right amount?",
+        "answer": 24,
+        "validation": function(input) { return parseInt(input) === 24; }
+    },
+    {
+        "question": "4. W = Joey and Chandler are on a mission to find baby Ben. They're trying to track down where he is after they got distracted by a pizza.\n\nChandler says, 'Ben is hiding at coordinates:\n   - Latitude: 28.5421\n   - Longitude: -81.3790\nBut Joey, ever the expert, says, 'We don’t need coordinates! We need the number of steps it takes to find him!'\n\nHow many steps will it take Joey and Chandler to find Baby Ben? (Hint: It’s the same number as the number of steps in their friendship.)",
+        "answer": "hillstone",
+        "validation": function(input) { return input.toLowerCase() === 'hillstone'; }
     }
+];
+
+// Load the first level
+let currentLevel = 0;
+loadLevel(currentLevel);
+
+// Function to load a level
+function loadLevel(levelIndex) {
+    if (levelIndex < questions.length) {
+        const question = questions[levelIndex];
+        
+        // Create and display the question form
+        const levelDiv = document.createElement('div');
+        levelDiv.classList.add('level', 'active');
+        
+        const questionText = document.createElement('p');
+        questionText.textContent = question.question;
+        levelDiv.appendChild(questionText);
+        
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Enter your answer';
+        levelDiv.appendChild(input);
+        
+        const button = document.createElement('button');
+        button.textContent = 'Submit Answer';
+        button.onclick = function() {
+            if (question.validation(input.value)) {
+                levelDiv.classList.remove('active');
+                currentLevel++;
+                loadLevel(currentLevel); // Load next level
+            } else {
+                alert("❌ Incorrect! Try again.");
+            }
+        };
+        levelDiv.appendChild(button);
+        
+        // Display the level
+        document.getElementById('levelContainer').innerHTML = ''; // Clear previous content
+        document.getElementById('levelContainer').appendChild(levelDiv);
+    } else {
+        // Show final congratulations
+        document.getElementById('congratulations').classList.add('active');
+    }
+}
 </script>
 
 </body>
