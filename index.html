@@ -73,5 +73,31 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
 
+        button:hover {
+            background-color: #005A8D;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #congratulations {
+            display: none;
+            font-size: 1.4em;
+            color: #28A745;
+        }
+
+        #congratulations.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Puzzle Game</h1>
+<p>Complete each puzzle to unlock the next level!</p>
+
+<!--
