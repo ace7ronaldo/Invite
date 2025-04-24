@@ -6,33 +6,80 @@
     <title>Puzzle Game</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
             text-align: center;
-            padding-top: 50px;
+            padding: 40px 20px;
+            color: #333;
         }
+
+        h1 {
+            color: #2e3a59;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
         .level {
             display: none;
-            margin: 20px;
-            padding: 20px;
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1em;
         }
+
         .level.active {
             display: block;
         }
+
+        input[type="text"] {
+            padding: 12px;
+            font-size: 1.2em;
+            width: 80%;
+            max-width: 350px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+
         button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 12px 24px;
+            font-size: 1.2em;
             background-color: #007BFF;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
+
         button:hover {
             background-color: #0056b3;
+        }
+
+        #congratulations {
+            display: none;
+            font-size: 1.4em;
+            color: #28a745;
+        }
+
+        #congratulations.active {
+            display: block;
         }
     </style>
 </head>
@@ -45,7 +92,7 @@
 <div id="levelContainer"></div>
 
 <!-- Congratulations: Final Message -->
-<div id="congratulations" class="level">
+<div id="congratulations">
     <h2>Congratulations!</h2>
     <p>You solved all the puzzles! 🎉 Your final destination is Hillstone in Orlando on April 24th at 6 PM.</p>
 </div>
@@ -59,17 +106,17 @@ const questions = [
         "validation": function(input) { return parseInt(input) === 6; }
     },
     {
-        "question": "2. Y = In the world of tech startups, Pied Piper’s algorithm is supposed to be revolutionary. However, Dinesh and Gilfoyle are debating an equation that could change everything.\n\nDinesh says, 'The solution to our problem is Fibonacci numbers, but we need the 4th Fibonacci number divisible by 4.'\n\nGilfoyle sarcastically retorts, 'This is exactly why you’re not getting a seat on the board.'\n\nCan you solve this problem to prove you belong on the board?",
+        "question": "2. In the world of tech startups, Pied Piper’s algorithm is supposed to be revolutionary. However, Dinesh and Gilfoyle are debating an equation that could change everything.\n\nDinesh says, 'The solution to our problem is Fibonacci numbers, but we need the 4th Fibonacci number divisible by 4.'\n\nGilfoyle sarcastically retorts, 'This is exactly why you’re not getting a seat on the board.'\n\nCan you solve this problem to prove you belong on the board?",
         "answer": 4,
         "validation": function(input) { return parseInt(input) === 4; }
     },
     {
-        "question": "3. Z = In the classic battle for supremacy over the Party Planning Committee, Dwight plans a party for 6 guests, each of whom will eat 4 cupcakes. How many cupcakes must Dwight order to make sure each guest gets the right amount?",
+        "question": "3. In the classic battle for supremacy over the Party Planning Committee, Dwight plans a party for 6 guests, each of whom will eat 4 cupcakes. How many cupcakes must Dwight order to make sure each guest gets the right amount?",
         "answer": 24,
         "validation": function(input) { return parseInt(input) === 24; }
     },
     {
-        "question": "4. W = Joey and Chandler are on a mission to find baby Ben. They're trying to track down where he is after they got distracted by a pizza.\n\nChandler says, 'Ben is hiding at coordinates:\n   - Latitude: 28.5421\n   - Longitude: -81.3790\nBut Joey, ever the expert, says, 'We don’t need coordinates! We need the number of steps it takes to find him!'\n\nHow many steps will it take Joey and Chandler to find Baby Ben? (Hint: It’s the same number as the number of steps in their friendship.)",
+        "question": "4. Joey and Chandler are on a mission to find baby Ben. They're trying to track down where he is after they got distracted by a pizza.\n\nChandler says, 'Ben is hiding at coordinates:\n   - Latitude: 28.5421\n   - Longitude: -81.3790\nBut Joey, ever the expert, says, 'We don’t need coordinates! We need the number of steps it takes to find him!'\n\nHow many steps will it take Joey and Chandler to find Baby Ben? (Hint: It’s the same number as the number of steps in their friendship.)",
         "answer": "hillstone",
         "validation": function(input) { return input.toLowerCase() === 'hillstone'; }
     }
@@ -122,3 +169,4 @@ function loadLevel(levelIndex) {
 
 </body>
 </html>
+
