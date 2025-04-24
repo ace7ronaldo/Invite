@@ -32,7 +32,9 @@ if (index >= questions.length) {
     📍 **Location:** Hillstone, Orlando<br><br>
     Can’t wait to see you there! 🥳
   `;
-
+   input.style.display = "none";
+    document.querySelector("button").style.display = "none";
+    return;
   container.textContent = questions[index].text;
   feedback.textContent = "";
   input.value = "";
