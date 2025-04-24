@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Puzzle Invite</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 400px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="card1" class="card">
+    <h2>Welcome to the Birthday Puzzle Invite Game!</h2>
+    <p>Solve each puzzle to reveal your invitation. Good luck!</p>
+    <button onclick="startGame()">Start Game</button>
+  </div>
+
+  <div id="card2" class="card hidden">
+    <h2>Level 1: Entourage</h2>
+    <p>Vinny and Drama are trying to figure out how many months it takes to complete a movie shoot. If the movie takes 18 weeks and they shoot 4 days per week, how many months will the movie take?</p>
+    <input type="number" id="level1" placeholder="Enter answer (months)">
+    <button onclick="checkLevel1()">Submit Answer</button>
+  </div>
+
+  <div id="card3" class="card hidden">
+    <h2>Level 2: Silicon Valley</h2>
+    <p>How many months will it take for Richard to get the new app running if it takes 10 weeks to develop and they work 5 days a week?</p>
+    <input type="number" id="level2" placeholder="Enter answer (months)">
+    <button onclick="checkLevel2()">Submit Answer</button>
+  </div>
+
+  <div id="card4" class="card hidden">
+    <h2>Level 3: The Office</h2>
+    <p>Jim and Dwight are on the Party Planning Committee, but Dwight insists on bringing 24 pizzas to the party. If each pizza feeds 5 people, how many people can be fed with 24 pizzas?</p>
+    <input type="number" id="level3" placeholder="Enter answer (people)">
+    <button onclick="checkLevel3()">Submit Answer</button>
+  </div>
+
+  <div id="card5" class="card hidden">
+    <h2>Level 4: Friends</h2>
+    <p>Joey and Chandler are on a mission to find Baby Ben. They search for 4 hours every day. How many months would it take if they search 30 days a month?</p>
+    <input type="number" id="level4" placeholder="Enter answer (months)">
+    <button onclick="checkLevel4()">Submit Answer</button>
+  </div>
+
+  <div id="card6" class="card hidden">
+    <h2>Congratulations!</h2>
+    <p id="finalMessage"></p>
+    <button onclick="restartGame()">Restart Game</button>
+  </div>
+
+  <script>
+    let currentLevel = 0;
+    const correctAnswers = [4, 2, 120, 1]; // Answers to each level in order
+    const answers = [];
+
+    function startGame() {
+      document.getElementById("card1").classList.add("hidden");
+      document.getElementById("card2").classList.remove("hidden");
+    }
+
+    function checkLevel1() {
+      const answer = document.getElementById("level1").value;
+      if (parseInt(answer) === correctAnswers[0]) {
+        answers.push(true);
+        nextLevel();
+      } else {
+        alert("Try again!");
+      }
+    }
+
+    function checkLevel2() {
+      const answer = document.getElementById("level2").value;
+      if (parseInt(answer) === correctAnswers[1]) {
+        answers.push(true);
+        nextLevel();
+      } else {
+        alert("Try again!");
+      }
+    }
+
+    function checkLevel3() {
+      const answer = document.getElementById("level3").value;
+      if (parseInt(answer) === correctAnswers[2]) {
+        answers.push(true);
+        nextLevel();
+      } else {
+        alert("Try again!");
+      }
+    }
+
+    function checkLevel4() {
+      const answer = document.getElementById("level4").value;
+      if (parseInt(answer) === correctAnswers[3]) {
+        answers.push(true);
+        showFinalMessage();
+      } else {
+        alert("Try again!");
+      }
+    }
+
+    function nextLevel() {
+      currentLevel++;
+      document.getElementById(`card${currentLevel + 2}`).classList.remove("hidden");
+    }
+
+    function showFinalMessage() {
+      document.getElementById("card5").classList.add("hidden");
+      document.getElementById("card6").classList.remove("hidden");
+      const finalMessage = `🎉 Congratulations! You’ve solved all the puzzles! See you on April 24th at 6 PM at Hillstone, Orlando!`;
+      document.getElementById("finalMessage").textContent = finalMessage;
+    }
+
+    function restartGame() {
+      currentLevel = 0;
+      answers.length = 0;
+      document.getElementById("card6").classList.add("hidden");
+      document.getElementById("card1").classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
