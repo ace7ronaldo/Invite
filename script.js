@@ -24,12 +24,14 @@ function loadLevel(index) {
   const feedback = document.getElementById("feedback");
   const input = document.getElementById("answer");
 
-  if (index >= questions.length) {
-    container.innerHTML = "🎉 You’ve solved the mystery! See you at the location! 🎉";
-    input.style.display = "none";
-    document.querySelector("button").style.display = "none";
-    return;
-  }
+if (index >= questions.length) {
+  container.innerHTML = `
+    🎉 You’ve solved the mystery! 🎉<br><br>
+    🗓️ **Date:** April 24th<br>
+    ⏰ **Time:** 6:00 PM<br>
+    📍 **Location:** Hillstone, Orlando<br><br>
+    Can’t wait to see you there! 🥳
+  `;
 
   container.textContent = questions[index].text;
   feedback.textContent = "";
