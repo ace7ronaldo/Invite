@@ -24,21 +24,24 @@ function loadLevel(index) {
   const feedback = document.getElementById("feedback");
   const input = document.getElementById("answer");
 
-if (index >= questions.length) {
-  container.innerHTML = `
-    🎉 You’ve solved the mystery! 🎉<br><br>
-    🗓️ **Date:** April 24th<br>
-    ⏰ **Time:** 6:00 PM<br>
-    📍 **Location:** Hillstone, Orlando<br><br>
-    Can’t wait to see you there! 🥳
-  `;
-   input.style.display = "none";
+  if (index >= questions.length) {
+    container.innerHTML = `
+      🎉 You’ve solved the mystery! 🎉<br><br>
+      🗓️ <strong>Date:</strong> April 24th<br>
+      ⏰ <strong>Time:</strong> 6:00 PM<br>
+      📍 <strong>Location:</strong> Hillstone, Orlando<br><br>
+      Can’t wait to see you there! 🥳
+    `;
+    input.style.display = "none";
     document.querySelector("button").style.display = "none";
     return;
+  }
+
   container.textContent = questions[index].text;
   feedback.textContent = "";
   input.value = "";
 }
+
 
 function submitAnswer() {
   const input = document.getElementById("answer").value.trim().toLowerCase();
